@@ -1,0 +1,54 @@
+___________________MongoDB______________
+> It is NOSQL database. (NoSql it not a structure Query Language like Oracle, Sql, and MySql)
+> It stores data in collections.
+> collections don't have row and columns like MySql.
+> Data stored in the Form of Objects.
+
+_______________________________________________________________________________________________
+
+________Command for the database________
+> use dbName (if you want to create new db or if DB name already their then it will use )
+> create collections (  db.createcollection('name_of_the_collection'))
+> drop the collection ( db.name-of_the-collection.drop() )
+> drop the dataBase (  db.dropDatabase()  )
+ 
+ _______________________________________________________________________________________________
+
+____________ Crud Operation In mongoDB _____________
+> Insert data in to database
+    =>db.collection_Name.insertOne({name:"", brand:"", email:""})
+
+>update data in to database
+    =>db.collection_Name.updateOne({name_which_you_want:""}, {$set:{updateCollectionName:""}})
+
+>Delete data in to database
+    =>db.product.deleteOne({name_which_you_want:""})
+ _______________________________________________________________________________________________
+
+_________________________ Connect Node with mongoDB ________________________________________________________
+const {MongoClient} = require('mongodb');
+const url="mongodb://localhost:27017";
+const client = new MongoClient(url);
+
+async function getData(){          //Function will return promise
+  let result = client.connect();  //now connect client
+  let db=result.db('e-comm');      //define the database name
+  let collection = db.collection('products')    //now make take the value from the collection
+  let response=await collection.find({}).toArray();     //return the promise and find the collection also arrenge the in array format
+
+console.log(response)
+}
+getData();
+
+ _______________________________________________________________________________________________
+
+_______________________________Mongoose___________________________________________
+
+ > mongoose is a advance version of mongoDB,
+ > In which we can handle the fields also validate,
+ > In which we can define schema and model
+
+ > What is schema 
+    =>schema is the collection fields.where you insert data.
+>What is model
+    =>Model helps to connect Nodejs to Mongodb
